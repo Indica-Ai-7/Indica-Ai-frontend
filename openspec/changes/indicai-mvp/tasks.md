@@ -2,11 +2,11 @@
 
 ## 1. Catálogo e API HTTP local
 
-- [ ] 1.1 Definir e aprovar em grupo o contrato do catálogo, incluindo campos, tipos, obrigatoriedade, validações e identificadores; verificar que o contrato aprovado está documentado antes de consolidar dados ou criar o formulário.
-- [ ] 1.2 Investigar fontes de dados e documentar permissões de reutilização e atribuições; verificar que cada fonte está comprovada ou que a impossibilidade de atingir o volume planejado está registrada como bloqueio, sem inventar registros.
-- [ ] 1.3 Preparar `db.json` com ao menos 200 registros distintos por tipo, identificadores estáveis e campos válidos, usando somente dados aprovados; verificar contagens, duplicações e conformidade com o contrato.
-- [ ] 1.4 Configurar JSON Server para expor os recursos do catálogo por HTTP; verificar consultas documentadas e operações necessárias para as etapas seguintes.
-- [ ] 1.5 Documentar como iniciar a API, consultar seus recursos e verificar o catálogo; verificar que outra pessoa consegue repetir os passos localmente.
+- [x] 1.1 Definir e aprovar em grupo o contrato do catálogo, incluindo campos, tipos, obrigatoriedade, validações e identificadores; verificar que o contrato aprovado está documentado antes de consolidar dados ou criar o formulário.
+- [x] 1.2 Investigar fontes de dados e documentar permissões de reutilização e atribuições; verificar que cada fonte está comprovada ou que a impossibilidade de atingir o volume planejado está registrada como bloqueio, sem inventar registros.
+- [x] 1.3 Preparar `db.json` com ao menos 200 registros distintos por tipo, identificadores estáveis e campos válidos, usando somente dados aprovados; verificar contagens, duplicações e conformidade com o contrato.
+- [x] 1.4 Configurar JSON Server para expor os recursos do catálogo por HTTP; verificar consultas documentadas e operações necessárias para as etapas seguintes.
+- [x] 1.5 Documentar como iniciar a API, consultar seus recursos e verificar o catálogo; verificar que outra pessoa consegue repetir os passos localmente.
 
 ## 2. Listagem e detalhes
 
