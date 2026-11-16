@@ -1,5 +1,32 @@
 # Indica-Ai-frontend
 
+## Catálogo local
+
+Instale as dependências com `npm install` e inicie a API em outro terminal:
+
+```sh
+npm run api
+```
+
+O JSON Server usa `db.json` e responde em `http://localhost:3001`:
+
+- `GET /titulos`: lista os títulos.
+- `GET /titulos?tipo=filme`: filtra pelo tipo.
+- `GET /titulos?_page=1&_limit=20`: retorna uma página de títulos.
+- `GET /titulos/<id>`: consulta um título pelo identificador.
+- `POST /titulos`: cadastra um objeto JSON conforme o
+  [contrato do catálogo](planejamento/contrato-catalogo.md).
+
+O servidor é uma ferramenta local de desenvolvimento e não valida o
+contrato por conta própria. Para verificar os campos e a quantidade por tipo:
+
+```sh
+node scripts/verificar-catalogo.mjs
+```
+
+O catálogo atual contém 200 registros em cada um dos cinco tipos. Consulte as
+[fontes e limitações dos dados](planejamento/fontes-catalogo.md).
+
 
 
 
