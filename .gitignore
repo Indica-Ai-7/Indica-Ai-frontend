@@ -12,6 +12,7 @@ node_modules
 package-lock.json
 dist
 dist-ssr
+.taste-skill/
 *.local
 
 # Editor directories and files

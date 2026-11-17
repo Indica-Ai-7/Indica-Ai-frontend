@@ -27,6 +27,32 @@ node scripts/verificar-catalogo.mjs
 O catálogo atual contém 200 registros em cada um dos cinco tipos. Consulte as
 [fontes e limitações dos dados](planejamento/fontes-catalogo.md).
 
+## Interface do catálogo
+
+Inicie o frontend em outro terminal:
+
+```sh
+npm run dev
+```
+
+Abra `http://localhost:5173/`. A página inicial lista os títulos retornados por
+`GET /titulos`, com busca por título, gênero, descrição ou palavra-chave e
+filtros pelos cinco tipos. A busca ignora diferenças de acentuação. A lista
+mostra 24 itens por vez; use **Carregar mais títulos** para revelar os
+próximos.
+
+Selecione um título para abrir seus detalhes. O identificador fica no parâmetro
+`?titulo=<id>`, então a página de detalhes também pode ser aberta diretamente;
+voltar no navegador retorna ao catálogo. Os detalhes vêm de
+`GET /titulos/<id>` e mostram os campos disponíveis, incluindo gêneros,
+descrição, avaliação e fonte.
+
+Durante a consulta, a interface mostra placeholders de carregamento. Uma
+resposta bem-sucedida sem registros mostra o estado de catálogo vazio; filtros
+sem resultados mostram uma mensagem própria; falhas da API exibem erro e uma
+ação de nova tentativa. Capas ausentes ou URLs de imagem indisponíveis recebem
+um fallback tipográfico local, sem criar imagens ou metadados para o título.
+
 
 
 

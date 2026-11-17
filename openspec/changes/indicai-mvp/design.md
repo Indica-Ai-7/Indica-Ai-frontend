@@ -55,6 +55,14 @@ The interface will remain understandable and usable without animation, support r
 
 **Alternative considered:** Applying every visual effect or dependency from both skills throughout the application. This was rejected to keep the catalog and recommendation tasks focused, performant, and coherent.
 
+### Catalog visual direction
+
+The catalog uses a white editorial ground, near-black text, and a signal-red accent, with Epilogue for interface and display text and JetBrains Mono for compact metadata. The visual identity is built from the catalog itself: category-coded, typographic cover fallbacks keep entries legible when no licensed image is available. The list is the primary screen, with compact type filters, text search, and progressively revealed results; detail pages keep the same header, spacing, and category treatment.
+
+The `design-taste-frontend` system informs hierarchy, responsive layout, keyboard focus, and restrained hover feedback. The `build-awwwards-quality-sites` review found no useful cinematic interaction for a repeated catalog workflow: no GSAP, smooth-scroll, WebGL, or animation dependency is added. A brief CSS entrance and small card hover are supplementary and are disabled for reduced-motion preferences. Catalog images are used only when supplied by the record; missing or failed images use the local typographic cover, without invented artwork.
+
+The direction has been recorded for group review; implementation does not treat group approval as already granted.
+
 ## Risks / Trade-offs
 
 - **[Catalog size and reuse rights may block the 200-entry-per-type target]** -> Verify sources and permissions before importing records; record a blocker rather than inventing entries or using unlicensed data.
