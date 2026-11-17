@@ -61,7 +61,7 @@ The catalog uses a white editorial ground, near-black text, and a signal-red acc
 
 The `design-taste-frontend` system informs hierarchy, responsive layout, keyboard focus, and restrained hover feedback. The `build-awwwards-quality-sites` review found no useful cinematic interaction for a repeated catalog workflow: no GSAP, smooth-scroll, WebGL, or animation dependency is added. A brief CSS entrance and small card hover are supplementary and are disabled for reduced-motion preferences. Catalog images are used only when supplied by the record; missing or failed images use the local typographic cover, without invented artwork.
 
-The direction has been recorded for group review; implementation does not treat group approval as already granted.
+The group approved this visual direction on 17 November 2026. No cinematic hero interaction was selected; the implementation remains focused on catalog discovery with restrained CSS feedback and reduced-motion support.
 
 ## Risks / Trade-offs
 
@@ -77,4 +77,3 @@ No existing production data or deployed service is being migrated. Configure and
 ## Open Questions
 
 - Which verified data source can provide the planned catalog volume with suitable reuse permissions?
-- Which hero or recommendation interaction, if any, merits the Awwwards-style motion treatment?

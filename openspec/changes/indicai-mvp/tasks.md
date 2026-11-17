@@ -12,7 +12,7 @@
 
 Dependência: Etapa 1 concluída.
 
-- [ ] 2.1 Usar `design-taste-frontend` para orientar o sistema visual e a composição das telas; avaliar com `build-awwwards-quality-sites` se uma interação de destaque agrega valor, registrar a decisão no design e verificar aprovação do grupo sem presumir dependências de animação. (Direção registrada em `design.md`; revisão/aprovação do grupo pendente.)
+- [x] 2.1 Usar `design-taste-frontend` para orientar o sistema visual e a composição das telas; avaliar com `build-awwwards-quality-sites` se uma interação de destaque agrega valor, registrar a decisão no design e verificar aprovação do grupo sem presumir dependências de animação. (Identidade visual aprovada pelo grupo em 17/11/2026 e registrada em `design.md`.)
 - [x] 2.2 Implementar em `src/api`, `src/pages` e `src/components` a consulta HTTP do catálogo, sua listagem e os detalhes; verificar com testes focados que a lista e o detalhe exibem dados da API correspondentes ao registro selecionado. (Verificado por testes de busca e seleção/detalhe, além dos probes HTTP para lista e registro individual.)
 - [x] 2.3 Implementar estados de carregamento, vazio, falha HTTP e fallback de imagem; verificar cada estado e a navegação em celular e desktop, incluindo os tamanhos de tela definidos na revisão visual. (Testes cobrem carregamento, catálogo vazio, erro/retry, detalhe indisponível e imagem quebrada; capturas verificadas em 390, 768, 820, 1024 e 1440px, incluindo detalhe em 390px.)
 - [x] 2.4 Documentar o fluxo de navegação e os estados da listagem e dos detalhes; verificar que a documentação corresponde ao comportamento implementado. (Documentado em `README.md`.)
