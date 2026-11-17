@@ -61,7 +61,6 @@ npm test
 
 
 
-
 # Documento de Discovery – Projeto Indica Aí
 
 Documento de concepção e levantamento inicial de requisitos de software
