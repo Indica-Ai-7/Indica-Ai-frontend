@@ -11,9 +11,9 @@ async function request(url, signal) {
   return response.json()
 }
 
+
 export async function getTitulos({ signal } = {}) {
-  const params = new URLSearchParams({ _page: '1', _limit: '1000' })
-  const titulos = await request(`${TITULOS_ENDPOINT}?${params}`, signal)
+  const titulos = await request(TITULOS_ENDPOINT, signal)
 
   if (!Array.isArray(titulos)) {
     throw new Error('A resposta da API não contém uma lista de títulos.')
@@ -24,4 +24,19 @@ export async function getTitulos({ signal } = {}) {
 
 export function getTitulo(id, { signal } = {}) {
   return request(`${TITULOS_ENDPOINT}/${encodeURIComponent(id)}`, signal)
+}
+
+export async function createTitulo(titulo, { signal } = {}) {
+  const response = await fetch(TITULOS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(titulo),
+    signal,
+  })
+
+  if (!response.ok) {
+    throw new Error(`A API respondeu com status ${response.status}.`)
+  }
+
+  return response.json()
 }

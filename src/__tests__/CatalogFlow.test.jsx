@@ -1,12 +1,13 @@
 import { vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 
-const { getTitulos, getTitulo } = vi.hoisted(() => ({
+const { getTitulos, getTitulo, createTitulo } = vi.hoisted(() => ({
   getTitulos: vi.fn(),
   getTitulo: vi.fn(),
+  createTitulo: vi.fn(),
 }))
 
-vi.mock('../api/titulos.js', () => ({ getTitulos, getTitulo }))
+vi.mock('../api/titulos.js', () => ({ getTitulos, getTitulo, createTitulo }))
 
 import App from '../App.jsx'
 import Poster from '../components/Poster.jsx'
@@ -38,6 +39,7 @@ beforeEach(() => {
   window.scrollTo = vi.fn()
   getTitulos.mockReset()
   getTitulo.mockReset()
+  createTitulo.mockReset()
 })
 
 afterEach(cleanup)
@@ -109,5 +111,42 @@ describe('fluxo do catálogo', () => {
     fireEvent.error(screen.getByRole('img', { name: 'Imagem de Coração de Outono' }))
 
     expect(screen.getByRole('img', { name: 'Capa indisponível para Coração de Outono' })).toBeTruthy()
+  })
+
+  it('atualiza o catálogo após um cadastro confirmado pela API', async () => {
+    const createdTitle = {
+      id: 'new-title-id',
+      titulo: 'Horizonte Azul',
+      tipo: 'filme',
+      ano: 2024,
+      generos: ['drama'],
+      descricao: 'Uma jornada por lugares desconhecidos.',
+      palavrasChave: [],
+    }
+    getTitulos.mockResolvedValueOnce([drama]).mockResolvedValueOnce([drama, createdTitle]).mockResolvedValueOnce([drama, createdTitle])
+    createTitulo.mockResolvedValue(createdTitle)
+    render(<App />)
+
+    fireEvent.click(await screen.findByRole('link', { name: 'Cadastrar título' }))
+    fireEvent.change(screen.getByLabelText('Título *'), { target: { value: createdTitle.titulo } })
+    fireEvent.change(screen.getByLabelText('Ano *'), { target: { value: String(createdTitle.ano) } })
+    fireEvent.change(screen.getByLabelText('Gêneros *'), { target: { value: createdTitle.generos.join(', ') } })
+    fireEvent.change(screen.getByLabelText('Descrição *'), { target: { value: createdTitle.descricao } })
+    fireEvent.click(screen.getByRole('button', { name: 'Cadastrar título' }))
+
+    expect(await screen.findByText('Título “Horizonte Azul” cadastrado com sucesso.')).toBeTruthy()
+    expect(await screen.findByRole('button', { name: /Horizonte Azul/ })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Dispensar aviso' }))
+    expect(screen.queryByText('Título “Horizonte Azul” cadastrado com sucesso.')).toBeNull()
+    expect(getTitulos).toHaveBeenCalledTimes(2)
+    expect(createTitulo).toHaveBeenCalledWith(expect.objectContaining({
+      titulo: createdTitle.titulo,
+      tipo: createdTitle.tipo,
+      ano: createdTitle.ano,
+    }))
+
+    cleanup()
+    render(<App />)
+    expect(await screen.findByRole('button', { name: /Horizonte Azul/ })).toBeTruthy()
   })
 })

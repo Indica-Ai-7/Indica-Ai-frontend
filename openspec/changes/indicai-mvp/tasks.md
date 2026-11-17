@@ -21,10 +21,10 @@ Dependência: Etapa 1 concluída.
 
 Dependência: Etapa 2 concluída.
 
-- [ ] 3.1 Implementar o formulário conforme o contrato aprovado, com validação e mensagens por campo; verificar campos obrigatórios, tipos inválidos e entradas válidas com testes focados.
-- [ ] 3.2 Integrar o envio HTTP e o feedback do formulário; verificar sucesso somente após resposta bem-sucedida, atualização da listagem e persistência após recarregar.
-- [ ] 3.3 Tratar falhas da API sem confirmação falsa e preservar os valores preenchidos quando possível; verificar rejeições e falhas de comunicação com testes focados.
-- [ ] 3.4 Documentar os campos e regras do cadastro; verificar que exemplos válidos e inválidos seguem o contrato aprovado.
+- [x] 3.1 Implementar o formulário conforme o contrato aprovado, com validação e mensagens por campo; verificar campos obrigatórios, tipos inválidos e entradas válidas com testes focados.
+- [x] 3.2 Integrar o envio HTTP e o feedback do formulário; verificar sucesso somente após resposta bem-sucedida, atualização da listagem e persistência após recarregar.
+- [x] 3.3 Tratar falhas da API sem confirmação falsa e preservar os valores preenchidos quando possível; verificar rejeições e falhas de comunicação com testes focados.
+- [x] 3.4 Documentar os campos e regras do cadastro; verificar que exemplos válidos e inválidos seguem o contrato aprovado.
 
 ## 4. Recomendação por regras locais
 

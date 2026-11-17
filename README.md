@@ -53,6 +53,59 @@ sem resultados mostram uma mensagem própria; falhas da API exibem erro e uma
 ação de nova tentativa. Capas ausentes ou URLs de imagem indisponíveis recebem
 um fallback tipográfico local, sem criar imagens ou metadados para o título.
 
+## Cadastro de títulos
+
+Use **Cadastrar título** no cabeçalho para abrir o formulário. Título, tipo,
+ano, gêneros e descrição são obrigatórios. O título não pode ficar vazio; o
+tipo deve ser um dos cinco tipos do catálogo; o ano deve ser inteiro entre
+1888 e o próximo ano; e os gêneros devem conter pelo menos um item separado
+por vírgula. A descrição deve conter texto.
+
+Palavras-chave podem ficar vazias; quando preenchidas, aceitam uma lista
+separada por vírgulas. A avaliação opcional deve estar entre 0 e 10. A URL da
+imagem, quando informada, deve usar HTTP ou HTTPS. O formulário não solicita
+fonte de dados e permite informar avaliação sem fonte; registros importados já
+existentes mantêm seus dados de origem. O identificador é gerado como UUID e
+não precisa ser preenchido.
+
+O formulário mostra erros junto aos campos correspondentes e preserva os
+valores quando a API rejeita ou não recebe o envio. A confirmação aparece
+somente após uma resposta HTTP bem-sucedida; então a listagem é atualizada a
+partir da API e uma notificação discreta aparece no canto inferior direito.
+Ela desaparece automaticamente após alguns segundos ou pode ser dispensada.
+Para conferir a persistência, recarregue a página depois de cadastrar e
+verifique se o registro continua no catálogo.
+
+Exemplo válido conforme o contrato (na interface, o UUID é gerado
+automaticamente):
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "titulo": "Horizonte Azul",
+  "tipo": "filme",
+  "ano": 2024,
+  "generos": ["drama", "aventura"],
+  "descricao": "Uma jornada por lugares desconhecidos.",
+  "palavrasChave": []
+}
+```
+
+Este exemplo é inválido: título e descrição vazios, tipo não permitido, ano
+fora do intervalo e lista de gêneros vazia.
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "titulo": "",
+  "tipo": "outro",
+  "ano": 1887,
+  "generos": [],
+  "descricao": "",
+  "palavrasChave": []
+}
+```
+
 Para executar os testes focados da interface:
 
 ```sh

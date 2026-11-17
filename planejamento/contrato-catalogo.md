@@ -11,15 +11,16 @@ Aplica-se aos registros de `titulos` no `db.json` e aos futuros cadastros.
 | `ano` | inteiro | Obrigatório, entre 1888 e o ano corrente mais um, inclusive. |
 | `generos` | lista de textos | Obrigatória, não vazia; cada gênero deve ser um texto não vazio. |
 | `descricao` | texto | Obrigatória, não vazia, própria ou de uso autorizado. |
-| `avaliacao` | número | Opcional, entre 0 e 10, inclusive; sua fonte deve ser identificada. |
+| `avaliacao` | número | Opcional, entre 0 e 10, inclusive. |
 | `imagem` | texto | Opcional; URL HTTP(S) de imagem autorizada. A interface deve usar fallback local quando estiver ausente ou indisponível. |
 | `palavrasChave` | lista de textos | Obrigatória, podendo ser vazia; cada item deve ser um texto não vazio. |
 | `fonte` | objeto | Obrigatório para obras importadas, com identificação da fonte e URL do registro. |
 
 O objeto `fonte` contém `nome` e `url`, ambos textos não vazios; `url` deve
-ser uma URL HTTP(S). Quando houver `avaliacao`, sua proveniência também deve
-ser identificada na documentação dos dados ou no registro. Campos opcionais
-ausentes são omitidos, não preenchidos com valores inventados.
+ser uma URL HTTP(S). A fonte continua obrigatória para obras importadas. Os
+novos cadastros manuais feitos pela interface podem omitir a fonte, inclusive
+quando informarem avaliação; registros já existentes não são alterados.
+Campos opcionais ausentes são omitidos, não preenchidos com valores inventados.
 
 A licença, as permissões e as atribuições aplicáveis devem ser documentadas
 antes da inclusão de dados. Direitos sobre imagens e textos devem ser

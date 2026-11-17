@@ -35,7 +35,10 @@ function LoadingGrid() {
   )
 }
 
-export default function CatalogPage({ onSelectTitle }) {
+export default function CatalogPage({
+  onSelectTitle,
+  refreshToken,
+}) {
   const [titulos, setTitulos] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -59,7 +62,7 @@ export default function CatalogPage({ onSelectTitle }) {
       })
 
     return () => controller.abort()
-  }, [retry])
+  }, [retry, refreshToken])
 
   function retryCatalog() {
     setError('')
