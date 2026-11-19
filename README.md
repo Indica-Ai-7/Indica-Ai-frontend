@@ -1,4 +1,112 @@
-# Indica-Ai-frontend
+# Indica Aí
+
+Plataforma web de recomendação de filmes, séries, documentários, animações e
+novelas a partir da descrição livre do que a pessoa quer assistir.
+
+## Sobre o projeto
+
+O tema do projeto é descoberta de conteúdo audiovisual. O problema é que a
+quantidade de títulos disponíveis nos serviços de streaming torna a escolha
+difícil, e as recomendações tradicionais costumam depender de histórico de
+visualização, que nem sempre reflete a vontade do momento. O Indica Aí permite
+que a pessoa descreva sua preferência atual em linguagem natural e receba
+sugestões do catálogo com uma explicação simples de por que cada título foi
+selecionado.
+
+O MVP inclui catálogo navegável com busca e filtros, detalhes de cada título,
+cadastro de novos títulos com validação, recomendação por regras locais e uma
+interface conversacional integrada. Os dados são servidos localmente por HTTP e
+não há uso de IA generativa ou de serviços externos.
+
+## Integrantes
+
+| Integrante | Etapas sob responsabilidade |
+| --- | --- |
+| João Vitor | Etapa 1 — catálogo e API HTTP local |
+| Thiago Prates | Etapa 2 — listagem e detalhes |
+| Giovanne Pagano dos Santos | Etapa 3 — cadastro de títulos |
+| Lorenzo Meni | Etapas 4 e 5 — recomendação local, chat e validação integrada |
+| Beatriz | Etapa 6 — documentação e entrega final |
+
+A documentação da Etapa 6 foi feita por Beatriz para revisão do grupo.
+O envio do link do repositório em nome do grupo fica a cargo de Beatriz.
+
+## Framework de SDD e justificativa
+
+O grupo adotou o **OpenSpec**. A escolha foi feita por ser um framework leve,
+em que cada mudança vira uma proposta com spec, design e tarefas versionados no
+próprio repositório, sem exigir uma estrutura de processos ou agentes por
+papel. Isso combinou com o tamanho do MVP e com o fluxo do OpenCode: as decisões
+e acordos do grupo ficaram registrados nos artefatos em vez de apenas em
+conversas, e a mudança guarda-chuva `indicai-mvp` organizou as cinco etapas de
+implementação com dependências e critérios de verificação. A validação
+`openspec validate --strict` também passou a fazer parte do checklist de
+entrega, garantindo que as specs permanecessem coerentes.
+
+## Requisitos atendidos
+
+- Front-end em React com Vite, organizado em `src/api`, `src/components` e
+  `src/pages`.
+- Consumo de uma API HTTP local (JSON Server com `db.json` como contrato).
+- Funcionalidade completa de cadastro, com listagem, validação e tratamento de
+  erro especificado.
+- Spec, plano e tarefas versionados em `openspec/` e `planejamento/`.
+
+## Como executar
+
+Pré-requisitos: Node.js 20 ou superior e npm.
+
+```sh
+npm install
+```
+
+Em um terminal, inicie a API:
+
+```sh
+npm run api
+```
+
+Em outro terminal, inicie o frontend:
+
+```sh
+npm run dev
+```
+
+Abra `http://localhost:5173/`. A API responde em `http://localhost:3001`.
+
+Comandos de verificação:
+
+```sh
+npm test        # testes focados
+npm run lint    # análise estática
+npm run build   # build de produção
+node scripts/verificar-catalogo.mjs  # integridade do catálogo
+npx --yes @fission-ai/openspec@latest validate indicai-mvp --strict
+```
+
+## Artefatos do projeto
+
+| Artefato | Localização |
+| --- | --- |
+| Proposta e specs OpenSpec | `openspec/changes/indicai-mvp/proposal.md` e `openspec/changes/indicai-mvp/specs/` |
+| Design técnico | `openspec/changes/indicai-mvp/design.md` |
+| Tarefas do MVP | `openspec/changes/indicai-mvp/tasks.md` |
+| Plano de implementação | [`planejamento/PLANEJAMENTO.md`](planejamento/PLANEJAMENTO.md) |
+| Contrato do catálogo | [`planejamento/contrato-catalogo.md`](planejamento/contrato-catalogo.md) |
+| Fontes e licenças dos dados | [`planejamento/fontes-catalogo.md`](planejamento/fontes-catalogo.md) |
+| Regras de recomendação | [`planejamento/recomendacao-local.md`](planejamento/recomendacao-local.md) |
+| Registros por etapa | `planejamento/tarefas/` |
+
+## Responsáveis por tarefa
+
+| Tarefa | Responsável |
+| --- | --- |
+| 1.1–1.5 Catálogo e API HTTP local | João Vitor |
+| 2.1–2.4 Listagem e detalhes | Thiago Prates |
+| 3.1–3.4 Cadastro de títulos | Giovanne Pagano dos Santos |
+| 4.1–4.4 Recomendação por regras locais | Lorenzo Meni |
+| 5.1–5.3 Chat e validação integrada | Lorenzo Meni |
+| 6.1 Documentação e entrega final | Beatriz, com revisão do grupo |
 
 ## Catálogo local
 
@@ -174,15 +282,50 @@ npx --yes @fission-ai/openspec@latest validate indicai-mvp --strict
 O registro da execução final da Etapa 5 está em
 [`planejamento/tarefas/tarefa-etapa-5-chat-validacao.md`](planejamento/tarefas/tarefa-etapa-5-chat-validacao.md).
 
+## Reflexão
 
+**Que decisão o agente teria tomado sozinho e a spec evitou?** Provavelmente
+teria importado o `db.json` diretamente no frontend, usado uma API externa de
+catálogo ou até preenchido o volume mínimo com registros inventados para chegar
+a 200 itens por tipo. A spec e o plano exigiram o limite HTTP em `src/api`,
+dados com origem e licença verificadas e o registro formal de bloqueio quando a
+meta não fosse viável. Do mesmo modo, a decisão de usar IA generativa para
+interpretar a busca foi descartada pela spec, que fixou regras locais,
+determinísticas e explicáveis.
 
-# Documento de Discovery – Projeto Indica Aí
+**Que inconsistência a validação encontrou? Estava na spec ou no código?** A
+contagem de testes registrada na tarefa 5.3 ("31 testes") não fechava com a
+quantidade de casos dos arquivos, porque os blocos `it.each` geram vários testes
+a partir de uma única declaração. A inconsistência estava no registro de
+validação, não na spec nem no comportamento do código. A validação também
+mostrou que o README ainda tinha trechos soltos da atividade e não documentava a
+Etapa 6, o que foi corrigido nesta entrega.
 
-Documento de concepção e levantamento inicial de requisitos de software
+**Como o framework ajudou (ou atrapalhou) a coordenação do grupo?** Ajudou a
+manter proposta, design, specs e tarefas no mesmo repositório, com dependências
+explícitas entre as etapas e critérios verificáveis em vez de acordos apenas em
+conversa. A mudança guarda-chuva também deixou claro o que cada etapa podia
+assumir das anteriores. Atrapalhou um pouco na manutenção: como as etapas foram
+feitas em paralelo, as anotações de conclusão e contagens envelheceram e
+precisaram ser conferidas no fechamento. O OpenSpec não registra sozinho quem é
+o responsável por cada tarefa, então essa divisão teve de ser documentada no
+README.
 
-# INDICA AÍ
+**O que fariam diferente com outro framework?** Com o GSD, talvez tivéssemos
+fases mais curtas com subagentes e contexto limpo, o que ajudaria a paralelizar
+as etapas, mas o contexto se fragmentaria e a visão do MVP completo exigiria
+mais costura. Com o BMAD, os papéis de analista, arquiteto e desenvolvedor
+poderiam melhorar a passagem de bastão entre etapas, ao custo de mais artefatos
+e cerimônia do que um MVP deste tamanho pede. O SpecKit daria uma constituição
+mais forte para regras gerais, porém o fluxo por comando seria mais pesado para
+cinco etapas. O OpenSpec continuaria sendo uma boa escolha; o ajuste seria
+validar as contagens e atualizar as tarefas no mesmo commit de cada mudança.
 
-Plataforma inteligente de recomendação de filmes
+# Apêndice — Documento de Discovery
+
+Documento de concepção e levantamento inicial de requisitos de software.
+
+**INDICA AÍ — plataforma inteligente de recomendação de filmes**
 
 | Informação | Descrição                            |
 | ---------- | ------------------------------------ |
@@ -444,45 +587,3 @@ A primeira versão da aplicação terá como foco validar a funcionalidade de pe
    Implementação de novas funcionalidades com base nos resultados obtidos.
 
 Documento de Discovery – Indica Aí | Versão 1.0 | Novembro de 2026
-
-
-rganização do grupo
-
-Escrevam a spec juntos, em uma única sessão do framework.
-
-Leiam a spec gerada em voz alta e corrijam o que estiver errado.
-
-Só passem para o plano quando todos concordarem com a spec.
-
-Depois, dividam as tarefas do plano: cada integrante implementa as suas.
-
-Todo acordo vai para os arquivos do framework, não para o WhatsApp.
-Escolham uma ferramenta
-Framework 	Ideia central 	Instalação (terminal) 	Fluxo no chat do opencode
-GSD 	Fases curtas e subagentes com contexto limpo, contra o context rot 	npx @opengsd/gsd-core@latest --opencode --local 	/gsd-new-project, /gsd-discuss-phase 1, /gsd-plan-phase 1, /gsd-execute-phase 1, /gsd-verify-work 1
-BMAD 	Agentes por papel (analista, PM, arquiteto, dev) que geram e refinam os artefatos 	npx skills add bmad-code-org/BMAD-METHOD -a opencode 	Siga o fluxo da skill bmad (brief, PRD, arquitetura, histórias)
-SpecKit 	Kit do GitHub com um comando por etapa, guiado por uma constituição 	uv tool install specify-cli e specify init --here --integration opencode 	/speckit.constitution, /speckit.specify, /speckit.plan, /speckit.tasks, /speckit.implement
-OpenSpec 	Leve: cada mudança vira uma proposta com specs, design e tarefas 	npm install -g @fission-ai/openspec@latest e openspec init --tools opencode 	/opsx-explore, /opsx-propose, /opsx-apply
-
-Os comandos exatos e as opções de cada framework estão no book Frameworks para criação de SDD; consultem o capítulo da ferramenta escolhida antes de começarem.
-Regras do projeto
-
-O contexto é livre: controle de estudos, biblioteca, cardápio de lanchonete, agenda de treinos, o que fizer sentido para o grupo.
-
-O projeto precisa cumprir apenas estes requisitos mínimos:
-Requisito 	Detalhe
-Front-end React com Vite 	Na estrutura de pastas usada neste livro (src/api, src/components, src/pages)
-Consumo de dados 	Uma API HTTP: a api-usuarios adaptada, uma API pública, um back-end próprio ou um mock com JSON Server
-Ao menos uma funcionalidade completa 	Com listagem, cadastro e um comportamento de erro especificado
-Artefatos versionados 	Spec, plano e tarefas gerados pelo framework, commitados no Git
-Dica: se o grupo não tiver back-end, usem o JSON Server como mock de dados. Nesse caso, o db.json é o contrato: descrevam seus recursos e campos na spec.
-Passo a passo
-Etapa 	O que fazer 	Evidência
-0. Preparar 	Criar o repositório no GitHub, o projeto com Vite e instalar o framework escolhido 	Primeiro push no GitHub com o framework instalado
-1. Especificar 	Rodar o comando de especificação, responder em grupo às perguntas do agente e revisar o arquivo gerado com todos 	Spec / PRD / proposta no repositório
-2. Planejar 	Gerar plano e tarefas; ajustar o que não fizer sentido e dividir as tarefas entre os integrantes 	Plano e lista de tarefas
-3. Implementar 	Cada integrante executa as suas tarefas e faz commits pequenos 	Commits pequenos e com mensagens claras
-4. Validar 	Usar o comando de verificação do framework e conferir os critérios de aceitação 	Relatório de verificação ou checklist preenchido
-Atenção: leiam todo artefato gerado antes de aprová-lo. Em cada etapa, façam pelo menos uma alteração própria e registrem-na no arquivo.
-
-

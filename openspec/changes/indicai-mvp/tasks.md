@@ -47,7 +47,7 @@ Dependências: Etapas 3 e 4 concluídas.
 
 Dependência: Etapa 5 concluída.
 
-- [ ] 6.1 Finalizar o `README.md` na raiz conforme o modelo de entrega, incluindo projeto e integrantes (tema e problema), framework e justificativa, comandos para iniciar API e frontend, localização da spec/plano/tarefas e responsáveis por cada tarefa, e reflexão sobre as quatro perguntas do modelo. Um integrante envia o link do repositório no GitHub em nome do grupo.
+- [x] 6.1 Finalizar o `README.md` na raiz conforme o modelo de entrega, incluindo projeto e integrantes (tema e problema), framework e justificativa, comandos para iniciar API e frontend, localização da spec/plano/tarefas e responsáveis por cada tarefa, e reflexão sobre as quatro perguntas do modelo. Um integrante envia o link do repositório no GitHub em nome do grupo. (README reestruturado com projeto, integrantes, justificativa do OpenSpec, comandos, artefatos, tabela de responsáveis e reflexão; o envio do link do repositório em nome do grupo fica a cargo de Beatriz.)
 
 ## Workflow follow-up
 
