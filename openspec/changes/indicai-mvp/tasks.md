@@ -43,6 +43,12 @@ Dependências: Etapas 3 e 4 concluídas.
 - [x] 5.2 Revisar responsividade, navegação por teclado, foco visível, rótulos, contraste e preferência por movimento reduzido; verificar os critérios na interface integrada e registrar os resultados. (Capturas revisadas em 1440, 1024, 820, 768 e 390 px; critérios aplicáveis de layout e acessibilidade registrados em `planejamento/tarefas/tarefa-etapa-5-chat-validacao.md`.)
 - [x] 5.3 Executar e registrar a validação integrada do MVP; verificar `npm run build`, `npm run lint` e o checklist manual reproduzível da API e dos fluxos principais. (Catálogo, 31 testes, lint, build, probes HTTP e validação estrita do OpenSpec aprovados; roteiro reproduzível documentado no `README.md`.)
 
+## 6. Documentação e entrega final
+
+Dependência: Etapa 5 concluída.
+
+- [ ] 6.1 Finalizar o `README.md` na raiz conforme o modelo de entrega, incluindo projeto e integrantes (tema e problema), framework e justificativa, comandos para iniciar API e frontend, localização da spec/plano/tarefas e responsáveis por cada tarefa, e reflexão sobre as quatro perguntas do modelo. Um integrante envia o link do repositório no GitHub em nome do grupo.
+
 ## Workflow follow-up
 
 - Arquivar `indicai-mvp` somente após concluir as tarefas, resolver ou registrar formalmente os bloqueios de dados e revisar os artefatos com o grupo.
