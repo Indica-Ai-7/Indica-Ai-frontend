@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-11-17T17:15:34Z",
+  "generatedOnPlatform": "win32",
+  "projectType": "webapp",
+  "devServer": {
+    "command": "npm",
+    "args": ["run", "api"],
+    "url": "http://localhost:3001/titulos",
+    "readyTimeoutSeconds": 60
+  },
+  "setup": [
+    {
+      "command": "npm",
+      "args": ["install", "--no-package-lock"],
+      "timeoutSeconds": 600
+    }
+  ],
+  "assertions": [
+    {
+      "name": "tests-pass",
+      "kind": "process",
+      "command": "npm",
+      "args": ["test"],
+      "verificationMethod": "test-results",
+      "expected": "0",
+      "timeoutSeconds": 180
+    },
+    {
+      "name": "lint-source",
+      "kind": "process",
+      "command": "npx",
+      "args": ["oxlint", "src"],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 120
+    },
+    {
+      "name": "production-build",
+      "kind": "process",
+      "command": "npm",
+      "args": ["run", "build"],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 180
+    },
+    {
+      "name": "catalog-data-contract",
+      "kind": "process",
+      "command": "node",
+      "args": ["scripts/verificar-catalogo.mjs"],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 60
+    },
+    {
+      "name": "frontend-home-200",
+      "kind": "http-probe",
+      "startCommand": "npm",
+      "startArgs": ["run", "dev", "--", "--host", "127.0.0.1"],
+      "url": "http://127.0.0.1:5173/",
+      "verificationMethod": "http-status",
+      "expected": "200",
+      "timeoutSeconds": 90
+    },
+    {
+      "name": "catalog-list-data",
+      "kind": "process",
+      "command": "node",
+      "args": [
+        "--input-type=module",
+        "-e",
+        "const response = await fetch('http://localhost:3001/titulos?_page=1&_limit=1000'); if (!response.ok) process.exit(1); const titles = await response.json(); if (titles.length !== 1000) process.exit(2);"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 60
+    },
+    {
+      "name": "catalog-detail-data",
+      "kind": "process",
+      "command": "node",
+      "args": [
+        "--input-type=module",
+        "-e",
+        "const response = await fetch('http://localhost:3001/titulos/wikidata-Q25128'); if (!response.ok) process.exit(1); const title = await response.json(); if (title.titulo !== 'Storm of Love') process.exit(2);"
+      ],
+      "verificationMethod": "exit-code",
+      "expected": "0",
+      "timeoutSeconds": 60
+    }
+  ]
+}

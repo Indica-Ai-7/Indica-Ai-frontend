@@ -8,8 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.npmrc
+package-lock.json
 dist
 dist-ssr
+.taste-skill/
+.tsupgrader/runtime-validation/standalone-result.json
 *.local
 
 # Editor directories and files
