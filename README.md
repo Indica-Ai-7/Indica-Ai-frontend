@@ -112,6 +112,26 @@ Para executar os testes focados da interface:
 npm test
 ```
 
+## Recomendação local
+
+O motor da Etapa 4 está em
+`src/recommendations/localRecommendation.js`. Ele recebe uma preferência e a
+lista retornada pela API, reconhece tipos, gêneros, anos e décadas por regras
+locais e devolve um destes estados: `empty-request`, `match`, `alternatives` ou
+`no-results`. Cada sugestão contém pontuação, critérios atendidos e uma
+explicação derivada desses critérios.
+
+As mesmas entradas sobre o mesmo catálogo sempre usam a mesma ordenação. O
+motor não utiliza IA generativa, serviços externos, histórico ou inferências
+além dos termos controlados. Consulte as
+[regras, buscas de referência e limites](planejamento/recomendacao-local.md).
+
+Para validar somente a recomendação:
+
+```sh
+npm test -- --run src/recommendations/localRecommendation.test.js
+```
+
 
 
 # Documento de Discovery – Projeto Indica Aí

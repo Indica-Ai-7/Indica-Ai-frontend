@@ -30,10 +30,10 @@ Dependência: Etapa 2 concluída.
 
 Dependência: Etapa 1 concluída.
 
-- [ ] 4.1 Definir normalização, critérios reconhecidos, mapeamento para metadados, pontuação e buscas de referência; verificar aprovação em grupo dos exemplos e da ordenação esperada.
-- [ ] 4.2 Implementar a busca e classificação local; verificar com testes que critérios equivalentes produzem ordenação consistente e explicações ligadas aos metadados correspondentes.
-- [ ] 4.3 Implementar estados de entrada vazia, correspondência, alternativas e ausência de resultados; verificar com testes que cada estado apresenta a mensagem e o próximo passo adequados.
-- [ ] 4.4 Documentar os limites da interpretação local e os exemplos de busca aprovados; verificar que a documentação não promete compreensão equivalente a uma IA.
+- [x] 4.1 Definir normalização, critérios reconhecidos, mapeamento para metadados, pontuação e buscas de referência; verificar aprovação em grupo dos exemplos e da ordenação esperada. (Regras e buscas adotadas para a execução da etapa em 19/11/2026 e documentadas em `planejamento/recomendacao-local.md`.)
+- [x] 4.2 Implementar a busca e classificação local; verificar com testes que critérios equivalentes produzem ordenação consistente e explicações ligadas aos metadados correspondentes. (Motor puro em `src/recommendations/localRecommendation.js`; 12 testes focados aprovados.)
+- [x] 4.3 Implementar estados de entrada vazia, correspondência, alternativas e ausência de resultados; verificar com testes que cada estado apresenta a mensagem e o próximo passo adequados. (Estados retornados pelo motor e cobertos pelos testes focados de recomendação.)
+- [x] 4.4 Documentar os limites da interpretação local e os exemplos de busca aprovados; verificar que a documentação não promete compreensão equivalente a uma IA. (Limites e exemplos registrados em `planejamento/recomendacao-local.md` e resumidos no `README.md`.)
 
 ## 5. Chat e validação integrada
 
