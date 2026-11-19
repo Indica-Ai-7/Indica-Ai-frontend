@@ -23,7 +23,7 @@ function DetailLoading() {
   )
 }
 
-export default function TitleDetailPage({ id, onBack }) {
+export default function TitleDetailPage({ id, onBack, backLabel = 'Voltar ao catálogo' }) {
   const [titulo, setTitulo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -46,7 +46,7 @@ export default function TitleDetailPage({ id, onBack }) {
   return (
     <section className="detail-page" aria-labelledby="detail-title">
       <div className="detail-page__wrap wrap">
-      <button className="detail-back" type="button" onClick={onBack}>Voltar ao catálogo</button>
+      <button className="detail-back" type="button" onClick={onBack}>{backLabel}</button>
       {loading ? (
         <DetailLoading />
       ) : error || !titulo ? (
@@ -54,7 +54,7 @@ export default function TitleDetailPage({ id, onBack }) {
           <p className="section-kicker">Título indisponível</p>
           <h1 id="detail-title">Não foi possível abrir este título.</h1>
           <p>A API não retornou os detalhes solicitados. Volte ao catálogo para escolher outro registro.</p>
-          <button className="back-button" type="button" onClick={onBack}>Voltar ao catálogo</button>
+          <button className="back-button" type="button" onClick={onBack}>{backLabel}</button>
         </div>
       ) : (
         <div className="detail-layout">

@@ -24,7 +24,7 @@ contrato por conta própria. Para verificar os campos e a quantidade por tipo:
 node scripts/verificar-catalogo.mjs
 ```
 
-O catálogo atual contém 200 registros em cada um dos cinco tipos. Consulte as
+O catálogo atual contém ao menos 200 registros em cada um dos cinco tipos. Consulte as
 [fontes e limitações dos dados](planejamento/fontes-catalogo.md).
 
 ## Interface do catálogo
@@ -131,6 +131,48 @@ Para validar somente a recomendação:
 ```sh
 npm test -- --run src/recommendations/localRecommendation.test.js
 ```
+
+## Interface de recomendação
+
+Com a API e o frontend em execução, use **Recomendar** no cabeçalho ou abra
+`http://localhost:5173/?recomendar=1`. Descreva uma preferência com tipo,
+gênero, ano ou década, como `filme de ficção científica dos anos 90`, e use
+**Buscar sugestões**. A interpretação e a ordenação acontecem no navegador com
+as regras locais da Etapa 4; o formulário não envia a descrição para um serviço
+externo.
+
+Cada resultado informa por que foi selecionado. Se não houver correspondência
+exata, a interface diferencia as alternativas relacionadas. Selecione um card
+para consultar os detalhes e use **Voltar às recomendações** para preservar a
+consulta. **Fazer nova busca** limpa o resultado anterior e devolve o foco ao
+campo de preferência. Entrada vazia, ausência de resultado e indisponibilidade
+da API apresentam orientação própria.
+
+## Validação integrada do MVP
+
+1. Instale as dependências com `npm install`.
+2. Em um terminal, execute `npm run api`.
+3. Em outro, execute `npm run dev` e abra `http://localhost:5173/`.
+4. Confirme que o catálogo abre, que um título exibe seus detalhes e que o
+   formulário de cadastro apresenta validações por campo.
+5. Abra **Recomendar**, pesquise `filme de ficção científica dos anos 90`,
+   consulte um resultado, volte às recomendações e inicie uma nova busca.
+6. Pare temporariamente a API, recarregue a recomendação e confirme a mensagem
+   de falha; reinicie a API e use **Tentar novamente**.
+7. Repita o fluxo em largura de celular e percorra os controles com `Tab`,
+   verificando o foco visível e a ativação por teclado.
+8. Execute a validação automatizada:
+
+```sh
+node scripts/verificar-catalogo.mjs
+npm test
+npm run lint
+npm run build
+npx --yes @fission-ai/openspec@latest validate indicai-mvp --strict
+```
+
+O registro da execução final da Etapa 5 está em
+[`planejamento/tarefas/tarefa-etapa-5-chat-validacao.md`](planejamento/tarefas/tarefa-etapa-5-chat-validacao.md).
 
 
 

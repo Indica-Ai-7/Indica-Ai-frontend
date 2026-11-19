@@ -39,9 +39,9 @@ Dependência: Etapa 1 concluída.
 
 Dependências: Etapas 3 e 4 concluídas.
 
-- [ ] 5.1 Implementar a interface conversacional ligada à recomendação local, com acesso aos detalhes e início de nova busca; verificar o fluxo completo de entrada, resultado, detalhes e nova consulta.
-- [ ] 5.2 Revisar responsividade, navegação por teclado, foco visível, rótulos, contraste e preferência por movimento reduzido; verificar os critérios na interface integrada e registrar os resultados.
-- [ ] 5.3 Executar e registrar a validação integrada do MVP; verificar `npm run build`, `npm run lint` e o checklist manual reproduzível da API e dos fluxos principais.
+- [x] 5.1 Implementar a interface conversacional ligada à recomendação local, com acesso aos detalhes e início de nova busca; verificar o fluxo completo de entrada, resultado, detalhes e nova consulta. (Página integrada ao motor local, à API e à rota de detalhes; fluxo coberto pelos testes focados.)
+- [x] 5.2 Revisar responsividade, navegação por teclado, foco visível, rótulos, contraste e preferência por movimento reduzido; verificar os critérios na interface integrada e registrar os resultados. (Capturas revisadas em 1440, 1024, 820, 768 e 390 px; critérios aplicáveis de layout e acessibilidade registrados em `planejamento/tarefas/tarefa-etapa-5-chat-validacao.md`.)
+- [x] 5.3 Executar e registrar a validação integrada do MVP; verificar `npm run build`, `npm run lint` e o checklist manual reproduzível da API e dos fluxos principais. (Catálogo, 31 testes, lint, build, probes HTTP e validação estrita do OpenSpec aprovados; roteiro reproduzível documentado no `README.md`.)
 
 ## Workflow follow-up
 

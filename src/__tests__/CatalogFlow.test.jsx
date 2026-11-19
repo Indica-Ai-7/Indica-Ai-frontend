@@ -149,4 +149,74 @@ describe('fluxo do catálogo', () => {
     render(<App />)
     expect(await screen.findByRole('button', { name: /Horizonte Azul/ })).toBeTruthy()
   })
+
+  it('completa o fluxo de preferência, recomendação, detalhes e nova busca', async () => {
+    getTitulos.mockResolvedValue([drama, series])
+    getTitulo.mockResolvedValue(drama)
+    render(<App />)
+
+    fireEvent.click(await screen.findByRole('link', { name: 'Recomendar' }))
+    const request = await screen.findByLabelText('Sua preferência')
+    fireEvent.change(request, { target: { value: 'filme de drama' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Buscar sugestões' }))
+
+    expect(screen.getByRole('heading', { name: 'Recomendações encontradas' })).toBeTruthy()
+    expect(screen.getByText('Corresponde aos critérios: tipo filme e gênero drama.')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: /Coração de Outono/ }))
+
+    expect(await screen.findByRole('heading', { level: 1, name: drama.titulo })).toBeTruthy()
+    expect(window.location.search).toBe('?titulo=wikidata-Q1&origem=recomendacao')
+    fireEvent.click(screen.getByRole('button', { name: 'Voltar às recomendações' }))
+
+    expect(await screen.findByRole('heading', { name: 'Recomendações encontradas' })).toBeTruthy()
+    expect(screen.getByLabelText('Sua preferência').value).toBe('filme de drama')
+    fireEvent.click(screen.getByRole('button', { name: 'Fazer nova busca' }))
+
+    expect(screen.queryByRole('heading', { name: 'Recomendações encontradas' })).toBeNull()
+    expect(screen.getByLabelText('Sua preferência').value).toBe('')
+    expect(document.activeElement).toBe(screen.getByLabelText('Sua preferência'))
+  })
+
+  it('orienta a entrada vazia sem exibir recomendações antigas', async () => {
+    getTitulos.mockResolvedValue([drama])
+    render(<App />)
+
+    fireEvent.click(await screen.findByRole('link', { name: 'Recomendar' }))
+    await screen.findByText('título comparado por regras locais')
+    fireEvent.click(screen.getByRole('button', { name: 'Buscar sugestões' }))
+
+    expect(screen.getByText('Escreva ao menos um tipo, gênero, ano ou década.')).toBeTruthy()
+    expect(screen.getByLabelText('Sua preferência').getAttribute('aria-invalid')).toBe('true')
+    expect(screen.queryByRole('heading', { name: 'Recomendações encontradas' })).toBeNull()
+  })
+
+  it('distingue alternativas no fluxo conversacional', async () => {
+    getTitulos.mockResolvedValue([drama, series])
+    render(<App />)
+
+    fireEvent.click(await screen.findByRole('link', { name: 'Recomendar' }))
+    fireEvent.change(await screen.findByLabelText('Sua preferência'), {
+      target: { value: 'filme de mistério' },
+    })
+    fireEvent.click(screen.getByRole('button', { name: 'Buscar sugestões' }))
+
+    expect(screen.getByRole('heading', { name: 'Alternativas relacionadas' })).toBeTruthy()
+    expect(screen.getAllByText('Alternativa')).toHaveLength(2)
+    expect(screen.getByText(/não encontramos uma correspondência exata/i)).toBeTruthy()
+  })
+
+  it('informa falha da API no chat e permite tentar novamente', async () => {
+    getTitulos
+      .mockResolvedValueOnce([drama])
+      .mockRejectedValueOnce(new Error('offline'))
+      .mockResolvedValueOnce([drama])
+    render(<App />)
+
+    fireEvent.click(await screen.findByRole('link', { name: 'Recomendar' }))
+    expect(await screen.findByText(/não foi possível consultar o catálogo/i)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Tentar novamente' }))
+
+    expect(await screen.findByText('título comparado por regras locais')).toBeTruthy()
+    expect(screen.queryByText(/não foi possível consultar o catálogo/i)).toBeNull()
+  })
 })

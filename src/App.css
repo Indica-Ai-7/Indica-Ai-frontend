@@ -70,7 +70,24 @@
   font-size: 14px;
   font-weight: 500;
   text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
   text-underline-offset: 5px;
+  transition: color 140ms ease, text-decoration-thickness 140ms ease;
+}
+
+.header-link:hover {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.header-link[aria-current='page'] {
+  text-decoration-thickness: 2px;
 }
 
 #main-content {
@@ -83,15 +100,256 @@
 }
 
 .site-footer__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
   min-height: 72px;
   color: var(--muted);
   font-size: 13px;
 }
 
 .catalog-page__wrap,
-.detail-page__wrap {
+.detail-page__wrap,
+.recommendation-page__wrap {
   width: min(1280px, calc(100% - 80px));
   margin: 0 auto;
+}
+
+.recommendation-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  align-items: end;
+  gap: 48px;
+  padding: 66px 0 48px;
+  animation: arrive 380ms ease-out both;
+}
+
+.recommendation-intro h1 {
+  max-width: 920px;
+  margin: 0;
+  font-size: clamp(42px, 5.2vw, 72px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+
+.recommendation-intro__lead {
+  max-width: 690px;
+  margin: 20px 0 0;
+  color: #454545;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.recommendation-fact {
+  padding: 16px 0 14px 18px;
+  border-left: 2px solid var(--accent);
+}
+
+.recommendation-fact strong,
+.recommendation-fact span {
+  display: block;
+}
+
+.recommendation-fact strong {
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.recommendation-fact span {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recommendation-conversation {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 32px 24px;
+  padding: 40px 0 48px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.recommendation-conversation > :not(.recommendation-form) {
+  grid-column: 1 / span 5;
+}
+
+.conversation-message {
+  max-width: 620px;
+}
+
+.conversation-message p {
+  margin: 8px 0 0;
+  font-size: 17px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.conversation-speaker {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.conversation-message--user {
+  padding-left: 18px;
+  border-left: 2px solid var(--ink);
+}
+
+.conversation-message--error {
+  grid-column: 2;
+  padding: 20px;
+  border: 1px solid var(--accent);
+}
+
+.conversation-next-step {
+  color: var(--muted);
+}
+
+.recommendation-form {
+  grid-column: 6 / -1;
+  grid-row: 1 / span 2;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.recommendation-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recommendation-form textarea {
+  width: 100%;
+  min-height: 126px;
+  padding: 14px 16px;
+  resize: vertical;
+  border: 1px solid #9a9a9a;
+  border-radius: 2px;
+  color: var(--ink);
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.recommendation-form textarea[aria-invalid='true'] {
+  border-color: var(--accent);
+}
+
+.recommendation-help,
+.recommendation-input-error {
+  margin: 9px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.recommendation-help {
+  color: #454545;
+}
+
+.recommendation-input-error {
+  color: #a31d17;
+}
+
+.recommendation-submit,
+.conversation-action {
+  min-height: 46px;
+  margin-top: 18px;
+  padding: 0 20px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  color: #fff;
+  background: var(--ink);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 140ms ease, background-color 140ms ease, transform 140ms ease;
+}
+
+.recommendation-submit:hover,
+.conversation-action:hover {
+  color: var(--ink);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.recommendation-submit:active,
+.conversation-action:active {
+  transform: translateY(0);
+}
+
+.recommendation-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+}
+
+.recommendation-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.recommendation-loading__mark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: loading-pulse 900ms ease-in-out infinite alternate;
+}
+
+.conversation-response {
+  display: grid;
+  gap: 24px;
+}
+
+.conversation-response .conversation-action {
+  width: max-content;
+  margin-top: 0;
+}
+
+.recommendation-results {
+  padding-top: 18px;
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recommendation-item {
+  min-width: 0;
+}
+
+.recommendation-item__reason {
+  min-height: 118px;
+  padding: 15px 16px 18px;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.recommendation-item__reason span {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+.recommendation-item__reason p {
+  margin: 8px 0 0;
+  color: #454545;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .catalog-intro {
@@ -797,6 +1055,10 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes loading-pulse {
+  to { opacity: 0.3; transform: scale(0.72); }
+}
+
 @media (max-width: 1080px) {
   .title-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -805,6 +1067,10 @@
   .detail-layout {
     gap: 40px;
   }
+
+  .recommendation-conversation {
+    gap: 32px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -812,7 +1078,8 @@
   .site-footer__inner,
   .catalog-page__wrap,
   .detail-page__wrap,
-  .form-page__wrap {
+  .form-page__wrap,
+  .recommendation-page__wrap {
     width: min(100% - 40px, 720px);
   }
 
@@ -824,6 +1091,30 @@
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 48px 0 32px;
+  }
+
+  .recommendation-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 48px 0 32px;
+  }
+
+  .recommendation-fact {
+    width: max-content;
+    padding: 0 0 0 12px;
+  }
+
+  .recommendation-conversation {
+    gap: 28px;
+    padding-block: 32px;
+  }
+
+  .recommendation-form {
+    padding: 20px;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .catalog-intro h1 {
@@ -893,12 +1184,114 @@
   .site-footer__inner,
   .catalog-page__wrap,
   .detail-page__wrap,
-  .form-page__wrap {
+  .form-page__wrap,
+  .recommendation-page__wrap {
     width: calc(100% - 32px);
   }
 
   .form-page__wrap {
     padding-top: 24px;
+  }
+
+  .site-header__inner {
+    min-height: 104px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .brand {
+    min-height: 44px;
+  }
+
+  .site-nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .header-link {
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .recommendation-intro {
+    gap: 18px;
+    padding: 26px 0 24px;
+  }
+
+  .recommendation-intro h1 {
+    font-size: 36px;
+    letter-spacing: -0.045em;
+  }
+
+  .recommendation-intro__lead {
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .recommendation-fact {
+    width: 100%;
+    padding: 10px 0 0;
+    border-top: 2px solid var(--accent);
+    border-left: 0;
+  }
+
+  .recommendation-conversation {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 0;
+  }
+
+  .recommendation-conversation > :not(.recommendation-form),
+  .recommendation-form,
+  .conversation-message--error {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .recommendation-form {
+    padding: 16px;
+  }
+
+  .recommendation-form textarea {
+    min-height: 100px;
+  }
+
+  .conversation-message p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .recommendation-submit,
+  .conversation-action {
+    margin-top: 14px;
+  }
+
+  .recommendation-submit,
+  .conversation-action,
+  .conversation-response .conversation-action {
+    width: 100%;
+  }
+
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .recommendation-item {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+
+  .recommendation-item__reason {
+    min-height: 100%;
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .form-intro {
